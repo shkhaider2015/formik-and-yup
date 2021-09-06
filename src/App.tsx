@@ -1,11 +1,8 @@
-import './App.css';
-import { AccountComp } from './Components/AccountComp';
-import { UserComp } from './Components/UserComp';
-import { SignupForm } from './FormikTest/SignupForm';
+import { MultiStepsForm } from './Components/MultiStepsForm';
 
 function App() {
-  return <div>
-    <AccountComp />
+  return <div style={{  }} >
+    <MultiStepsForm />
   </div>
 }
 

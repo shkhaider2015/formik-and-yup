@@ -2,7 +2,7 @@ import { Form } from "react-bootstrap"
 
 export const AccountComp = () =>
 {
-    return <div className="ps-3 pe-3 w-50 shadow" >
+    return <div className="ps-3 pe-3 pt-3 pb-3 w-50 shadow" >
         <Form.Group className="p-3" >
         <Form.Control type="number" placeholder="Account Number" />
         <Form.Text></Form.Text>
