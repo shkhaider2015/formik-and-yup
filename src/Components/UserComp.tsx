@@ -1,14 +1,27 @@
-import { FormikProps } from "formik"
+import {Button} from "react-bootstrap"
+import { FormikProps, useFormik } from "formik"
 import { Form } from "react-bootstrap"
-import { FC } from "react-transition-group/node_modules/@types/react"
-import { IFormik } from "./FormikData"
+import { FC, Dispatch, SetStateAction } from "react-transition-group/node_modules/@types/react"
+import { IUser, userInitialValues, userValidationSchema } from "../Types/user"
 
-type propsType = {
-    formik: FormikProps<IFormik>
+type propType = {
+    step : number,
+    setStep : Dispatch<SetStateAction<number>>
 }
 
-export const UserComp: FC<propsType> = ({ formik }) => {
-    return <div className="ps-3 pe-3 w-50 shadow" >
+export const UserComp: FC<propType> = ({ step, setStep }) => {
+
+    const formik:FormikProps<IUser> = useFormik<IUser>({
+        initialValues : userInitialValues,
+        validationSchema: userValidationSchema,
+        onSubmit: values => {
+            // alert(JSON.stringify(values, null, 2))
+            console.log("Submit : ", values)
+            setStep(step+1)
+        },
+    })
+
+    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 w-50 shadow" >
         <div className="d-flex flex-direction-column justify-content-between p-3" >
             <Form.Group className="w-50 pe-3" >
                 <Form.Control
@@ -103,5 +116,32 @@ export const UserComp: FC<propsType> = ({ formik }) => {
             </Form.Text>
         </Form.Group>
 
-    </div>
+        <Form.Group className="p-3">
+            <Form.Control
+                id="address"
+                type="text"
+                placeholder="Address"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.address}
+            />
+            <Form.Text className="text-muted" >
+                {
+                    formik.touched.address && formik.errors.address
+                        ? formik.errors.address
+                        : null
+                }
+            </Form.Text>
+        </Form.Group>
+
+        <div className="mt-4" >
+            <Button className="pt-2 pb-2 ps-4 pe-4 me-3" >Back</Button>
+            <Button
+                variant="primary"
+                className="pt-2 pb-2 ps-4 pe-4 ms-3"
+                type="submit"
+            >Next</Button>
+        </div>
+
+    </form>
 }

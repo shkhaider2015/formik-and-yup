@@ -1,13 +1,25 @@
-import { FormikProps } from "formik"
+import {Button} from "react-bootstrap"
+import { FormikProps, useFormik } from "formik"
 import { Form } from "react-bootstrap"
-import { FC } from "react-transition-group/node_modules/@types/react"
+import { Dispatch, FC, SetStateAction } from "react-transition-group/node_modules/@types/react"
+import { admissionInitialValues, admissionValidationSchema, IAdmission } from "../Types/admission"
 import { IFormik } from "./FormikData"
 
-type propsType = {
-    formik: FormikProps<IFormik>
+type propType = {
+    step : number
+    setStep : Dispatch<SetStateAction<number>>
 }
 
-export const AdmissionComp: FC<propsType> = ({ formik }) => {
+export const AdmissionComp: FC<propType> = ({ step, setStep }) => {
+
+    const formik:FormikProps<IAdmission>  = useFormik<IAdmission>({
+        initialValues : admissionInitialValues,
+        validationSchema: admissionValidationSchema,
+        onSubmit: values => {
+            setStep(step+1)
+        }
+    })
+
     return <div className="ps-3 pe-3 w-50 shadow" >
         <Form.Group className="p-3" >
             <Form.Control
@@ -84,6 +96,14 @@ export const AdmissionComp: FC<propsType> = ({ formik }) => {
                 }
             </Form.Text>
         </Form.Group>
+
+        <div className="mt-4" >
+            <Button className="pt-2 pb-2 ps-4 pe-4 me-3" >Back</Button>
+            <Button
+                className="pt-2 pb-2 ps-4 pe-4 ms-3"
+                type="submit"
+            >Next</Button>
+        </div>
 
     </div>
 }

@@ -13,10 +13,12 @@ export const initialValues:IFormik = {
     password : '',
     confirmPassword : '',
     address : '',
+    
     accountNumber : 0,
     balance : 0,
     bankName : '',
     accountType : 'Savings Account',
+
     department : 'Computer',
     program : '',
     batch : '',

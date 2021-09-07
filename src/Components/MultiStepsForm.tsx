@@ -1,33 +1,25 @@
 import { FormikProps, useFormik } from "formik"
 import { Button } from "react-bootstrap"
-import { useState } from "react"
+import { useState, Dispatch, SetStateAction } from "react"
 import { AccountComp } from "./AccountComp"
 import { AdmissionComp } from "./AdmissionComp"
 import { initialValues, ValidationSchema, IFormik } from "./FormikData"
 import { UserComp } from "./UserComp"
 
-const GetForm = (step :number, formik:FormikProps<IFormik>) => {
+const GetForm = (step :number, setStep:Dispatch<SetStateAction<number>>) => {
     switch (step) {
         case 0:
-            return <UserComp formik={formik} />
+            return <UserComp step={step} setStep={setStep} />
         case 1:
-            return <AccountComp formik={formik} />
+            return <AccountComp step={step} setStep={setStep} />
         case 2:
-            return <AdmissionComp formik={formik} />
+            return <AdmissionComp step={step} setStep={setStep} />
         default:
             return <div> <h1>Complete !!</h1> </div>
     }
 }
 
 export const MultiStepsForm = () => {
-
-    const formik: FormikProps<IFormik> = useFormik<IFormik>({
-        initialValues,
-        validationSchema: ValidationSchema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2))
-        }
-    })
 
     const [step, setStep] = useState<number>(0);
 
@@ -36,17 +28,18 @@ export const MultiStepsForm = () => {
         <div className="col-12 text-center p-5">
             <h1>MultiSteps Form </h1>
         </div>
-        <div className="col-12 d-flex justify-content-center text-center" >
+        <div className="col-12 text-center " >
+            
+            <div className="d-flex justify-content-center" >
             {
-                GetForm(step, formik)
+                GetForm(step, setStep)
             }
-            {console.log(formik.errors ? formik.errors : "No Error")}
+            </div>
+            
+            
             
         </div>
         <div className="col-12 text-center p-5">
-            <Button>Back</Button> 
-            <Button type="submit"
-            >Next</Button>
         </div>
     </div>
 }
