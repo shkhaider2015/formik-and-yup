@@ -37,12 +37,12 @@ export const UserComp: FC<propsType> = ({ formik }) => {
                     placeholder="Last Name"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.lastname}
+                    value={formik.values.lastName}
                 />
                 <Form.Text className="text-muted" >
                     {
-                        formik.touched.lastname && formik.errors.lastname
-                            ? formik.errors.lastname
+                        formik.touched.lastName && formik.errors.lastName
+                            ? formik.errors.lastName
                             : null
                     }
                 </Form.Text>

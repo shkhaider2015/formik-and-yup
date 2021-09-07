@@ -8,7 +8,7 @@ export interface IFormik extends IUser, IAccount, IAdmission{
 
 export const initialValues:IFormik = {
     firstName : '',
-    lastname : '',
+    lastName : '',
     email : '',
     password : '',
     confirmPassword : '',
