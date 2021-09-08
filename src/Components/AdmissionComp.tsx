@@ -3,7 +3,6 @@ import { FormikProps, useFormik } from "formik"
 import { Form } from "react-bootstrap"
 import { Dispatch, FC, SetStateAction } from "react-transition-group/node_modules/@types/react"
 import { admissionInitialValues, admissionValidationSchema, IAdmission } from "../Types/admission"
-import { IFormik } from "./FormikData"
 
 type propType = {
     step : number

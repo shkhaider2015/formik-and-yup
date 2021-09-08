@@ -1,9 +1,7 @@
-import { FormikProps, useFormik } from "formik"
 import { Button } from "react-bootstrap"
-import { useState, Dispatch, SetStateAction, FC, ReactHTMLElement } from "react"
+import { useState, Dispatch, SetStateAction } from "react"
 import { AccountComp } from "./AccountComp"
 import { AdmissionComp } from "./AdmissionComp"
-import { initialValues, ValidationSchema, IFormik } from "./FormikData"
 import { UserComp } from "./UserComp"
 
 const GetForm = (step :number, values :any, setStep:Dispatch<SetStateAction<number>>, setValues :Dispatch<SetStateAction<any>>) => {
