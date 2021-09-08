@@ -7,20 +7,23 @@ import { IFormik } from "./FormikData"
 
 type propType = {
     step : number
+    values : any
     setStep : Dispatch<SetStateAction<number>>
+    setValues :Dispatch<SetStateAction<any>>
 }
 
-export const AdmissionComp: FC<propType> = ({ step, setStep }) => {
+export const AdmissionComp: FC<propType> = ({ step, setStep, values, setValues }) => {
 
     const formik:FormikProps<IAdmission>  = useFormik<IAdmission>({
         initialValues : admissionInitialValues,
         validationSchema: admissionValidationSchema,
-        onSubmit: values => {
+        onSubmit: val => {
             setStep(step+1)
+            setValues({...val, ...values})
         }
     })
 
-    return <div className="ps-3 pe-3 w-50 shadow" >
+    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 w-50 shadow" >
         <Form.Group className="p-3" >
             <Form.Control
                 id="department"
@@ -82,6 +85,7 @@ export const AdmissionComp: FC<propType> = ({ step, setStep }) => {
 
         <Form.Group className="p-3">
             <Form.Control
+            id="program"
                 type="text"
                 placeholder="Program"
                 onChange={formik.handleChange}
@@ -105,5 +109,5 @@ export const AdmissionComp: FC<propType> = ({ step, setStep }) => {
             >Next</Button>
         </div>
 
-    </div>
+    </form>
 }

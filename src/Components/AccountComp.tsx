@@ -7,19 +7,22 @@ import { IFormik } from "./FormikData"
 
 type propType = {
     step: number
+    values : any
     setStep : Dispatch<SetStateAction<number>>
+    setValues :Dispatch<SetStateAction<any>>
 }
 
-export const AccountComp: FC<propType> = ({ step, setStep }) => {
+export const AccountComp: FC<propType> = ({ step, setStep, values, setValues  }) => {
     const formik: FormikProps<IAccount> = useFormik<IAccount>({
         initialValues: accountInitialValues,
         validationSchema: accountValidationSchema,
-        onSubmit: values => {
+        onSubmit: val => {
             setStep(step+1)
+            setValues({...val, ...values})
         }
     })
 
-    return <div className="ps-3 pe-3 pt-3 pb-3 w-50 shadow" >
+    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 pt-3 pb-3 w-50 shadow" >
         <Form.Group className="p-3" >
             <Form.Control
                 id="accountNumber"
@@ -102,5 +105,5 @@ export const AccountComp: FC<propType> = ({ step, setStep }) => {
                 type="submit"
             >Next</Button>
         </div>
-    </div>
+    </form>
 }

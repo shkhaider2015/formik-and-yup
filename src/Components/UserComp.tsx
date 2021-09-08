@@ -6,18 +6,19 @@ import { IUser, userInitialValues, userValidationSchema } from "../Types/user"
 
 type propType = {
     step : number,
+    values : any
     setStep : Dispatch<SetStateAction<number>>
+    setValues :Dispatch<SetStateAction<any>>
 }
 
-export const UserComp: FC<propType> = ({ step, setStep }) => {
+export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => {
 
     const formik:FormikProps<IUser> = useFormik<IUser>({
         initialValues : userInitialValues,
         validationSchema: userValidationSchema,
-        onSubmit: values => {
-            // alert(JSON.stringify(values, null, 2))
-            console.log("Submit : ", values)
+        onSubmit: val => {
             setStep(step+1)
+            setValues({...values, ...val})
         },
     })
 

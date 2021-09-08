@@ -1,27 +1,48 @@
 import { FormikProps, useFormik } from "formik"
 import { Button } from "react-bootstrap"
-import { useState, Dispatch, SetStateAction } from "react"
+import { useState, Dispatch, SetStateAction, FC, ReactHTMLElement } from "react"
 import { AccountComp } from "./AccountComp"
 import { AdmissionComp } from "./AdmissionComp"
 import { initialValues, ValidationSchema, IFormik } from "./FormikData"
 import { UserComp } from "./UserComp"
 
-const GetForm = (step :number, setStep:Dispatch<SetStateAction<number>>) => {
+const GetForm = (step :number, values :any, setStep:Dispatch<SetStateAction<number>>, setValues :Dispatch<SetStateAction<any>>) => {
     switch (step) {
         case 0:
-            return <UserComp step={step} setStep={setStep} />
+            return <UserComp step={step} setStep={setStep} setValues={setValues} values={values} />
         case 1:
-            return <AccountComp step={step} setStep={setStep} />
+            return <AccountComp step={step} setStep={setStep} setValues={setValues} values={values} />
         case 2:
-            return <AdmissionComp step={step} setStep={setStep} />
+            return <AdmissionComp step={step} setStep={setStep} setValues={setValues} values={values} />
         default:
-            return <div> <h1>Complete !!</h1> </div>
+            return <div className="text-center" > <h1>Complete !!</h1> 
+                {
+                  Object.keys(values).map((key:any, index:number) => (
+                      <div key={index} className="d-flex flex-row" >
+                          <p className="ms-2" > {key} </p>
+                          <p className="ms-2" > {values[key]} </p>
+                        
+                      </div>
+                  ))
+                }
+                <Button 
+                    className="ps-3 pe-3"
+                    variant="primary"
+                    onClick={() => {
+                        setStep(0)
+                        setValues({})
+                    }}
+                >
+                    Reset
+                </Button>
+            </div>
     }
 }
 
 export const MultiStepsForm = () => {
 
     const [step, setStep] = useState<number>(0);
+    const [values, setValues] = useState({});
 
 
     return <div className="row" >
@@ -32,7 +53,7 @@ export const MultiStepsForm = () => {
             
             <div className="d-flex justify-content-center" >
             {
-                GetForm(step, setStep)
+                GetForm(step, values, setStep, setValues)
             }
             </div>
             
