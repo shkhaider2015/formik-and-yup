@@ -22,7 +22,7 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
         },
     })
 
-    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 w-50 shadow" >
+    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 pb-3 w-50 shadow rounded" >
         <div className="d-flex flex-direction-column justify-content-between p-3" >
             <Form.Group className="w-50 pe-3" >
                 <Form.Control
@@ -33,6 +33,7 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.firstName}
+                    required
                 />
                 <Form.Text className="text-muted" >
                     {
@@ -52,6 +53,7 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.lastName}
+                    required
                 />
                 <Form.Text className="text-muted" >
                     {
@@ -71,6 +73,7 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
+                required
             />
             <Form.Text className="text-muted" >
                 {
@@ -89,6 +92,7 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
+                required
             />
             <Form.Text className="text-muted" >
                 {
@@ -107,6 +111,7 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.confirmPassword}
+                required
             />
             <Form.Text className="text-muted" >
                 {
@@ -125,6 +130,7 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.address}
+                required
             />
             <Form.Text className="text-muted" >
                 {
@@ -136,7 +142,11 @@ export const UserComp: FC<propType> = ({ step, values, setStep, setValues }) => 
         </Form.Group>
 
         <div className="mt-4" >
-            <Button className="pt-2 pb-2 ps-4 pe-4 me-3" >Back</Button>
+            <Button 
+                className="pt-2 pb-2 ps-4 pe-4 me-3"
+                disabled={step === 0 ? true : false} 
+                onClick={() => setStep(step-1)}
+            >Back</Button>
             <Button
                 variant="primary"
                 className="pt-2 pb-2 ps-4 pe-4 ms-3"

@@ -1,3 +1,9 @@
+# Project URL
+## https://shkhaider-multistep-form.surge.sh
+
+# Technology Used
+## ReactJS, Typescript, React-Bootstrap, Formik, Yup
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

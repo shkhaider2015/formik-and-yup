@@ -3,6 +3,7 @@ import { useState, Dispatch, SetStateAction } from "react"
 import { AccountComp } from "./AccountComp"
 import { AdmissionComp } from "./AdmissionComp"
 import { UserComp } from "./UserComp"
+import { AccountSVG, AdmissionSVG, UserInfoSVG, CompleteSVG } from "../Static/static";
 
 const GetForm = (step :number, values :any, setStep:Dispatch<SetStateAction<number>>, setValues :Dispatch<SetStateAction<any>>) => {
     switch (step) {
@@ -37,6 +38,9 @@ const GetForm = (step :number, values :any, setStep:Dispatch<SetStateAction<numb
     }
 }
 
+const myPrimaryColor:string = "#1976D2";
+const mySecondaryColor:string = "#dedede";
+
 export const MultiStepsForm = () => {
 
     const [step, setStep] = useState<number>(0);
@@ -44,8 +48,29 @@ export const MultiStepsForm = () => {
 
 
     return <div className="row" >
+       
+            <div className="col-12 d-flex justify-content-center mt-2 ">
+            <UserInfoSVG width="3rem" height="3rem" fill={step >= 0 ? myPrimaryColor : mySecondaryColor} />
+            <hr style={{ width : '15vw', height: '3px' , marginBottom : 'auto', marginTop : 'auto', color : `${ step > 0 ? myPrimaryColor : mySecondaryColor }`, marginLeft : '1rem', marginRight : '1rem'  }} />
+            <AccountSVG width="3rem" height="3rem" fill={step >= 1 ? myPrimaryColor : mySecondaryColor} />
+            <hr style={{ width : '15vw', height: '3px' , marginBottom : 'auto', marginTop : 'auto', color : `${ step > 1 ? myPrimaryColor : mySecondaryColor }`, marginLeft : '1rem', marginRight : '1rem'  }}/>
+            <AdmissionSVG width="3rem" height="3rem" fill={step >= 2 ? myPrimaryColor : mySecondaryColor} />
+            <hr style={{ width : '15vw', height: '3px' , marginBottom : 'auto', marginTop : 'auto', color : `${ step > 2 ? myPrimaryColor : mySecondaryColor }`, marginLeft : '1rem', marginRight : '1rem'  }}/>
+            <CompleteSVG width="3rem" height="3rem" fill={step >= 3 ? myPrimaryColor : mySecondaryColor} />
+
+        </div>
+            
         <div className="col-12 text-center p-5">
-            <h1>MultiSteps Form </h1>
+            <span 
+                style={{ 
+                    fontFamily : "fantasy", 
+                    fontSize : '3rem',
+                    WebkitTextFillColor : 'white',
+                    WebkitTextStrokeColor : myPrimaryColor,
+                    WebkitTextStrokeWidth : '2px' 
+                        }} 
+            
+            >MultiSteps Form </span>
         </div>
         <div className="col-12 text-center " >
             

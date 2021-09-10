@@ -1,7 +1,7 @@
 import { MultiStepsForm } from './Components/MultiStepsForm';
 
 function App() {
-  return <div style={{  }} >
+  return <div className="container" >
     <MultiStepsForm />
   </div>
 }

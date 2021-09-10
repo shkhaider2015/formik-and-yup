@@ -34,14 +34,22 @@ export const AdmissionComp: FC<propType> = ({ step, setStep, values, setValues }
                 value={formik.values.department}
                 required
                 >
-                <option value="Computer">Computer</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Machenical">Machenical</option>
-                <option value="Civil">Civil</option>
-                <option value="Textile">Textile</option>
-                <option value="Mechatronics">Mechatronics</option>
-                <option value="Chemical">Chemical</option>
+                    <option value="">Select Department</option>
+                    <option value="Computer">Computer</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Machenical">Machenical</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Textile">Textile</option>
+                    <option value="Mechatronics">Mechatronics</option>
+                    <option value="Chemical">Chemical</option>
             </Form.Select>
+            <Form.Text className="text-muted" >
+                    {
+                        formik.touched.department && formik.errors.department
+                            ? formik.errors.department
+                            : null
+                    }
+                </Form.Text>
 
         </Form.Group>
 

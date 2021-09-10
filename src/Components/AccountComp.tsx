@@ -21,7 +21,7 @@ export const AccountComp: FC<propType> = ({ step, setStep, values, setValues  })
         }
     })
 
-    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 pt-3 pb-3 w-50 shadow" >
+    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 pt-3 pb-3 w-50 shadow rounded" >
         <Form.Group className="p-3" >
             <Form.Control
                 id="accountNumber"
@@ -30,6 +30,7 @@ export const AccountComp: FC<propType> = ({ step, setStep, values, setValues  })
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.accountNumber}
+                required
             />
             <Form.Text className="text-muted" >
                 {
@@ -50,6 +51,7 @@ export const AccountComp: FC<propType> = ({ step, setStep, values, setValues  })
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.balance}
+                    required
                 />
                 <Form.Text className="text-muted" >
                     {
@@ -61,23 +63,28 @@ export const AccountComp: FC<propType> = ({ step, setStep, values, setValues  })
             </Form.Group>
 
             <Form.Group className="w-50 ps-3" >
-                <Form.Control
-                    id="accountType"
-                    className="w-100"
-                    type="text"
-                    placeholder="Account Type"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.accountType}
-                />
-                <Form.Text className="text-muted" >
+            <Form.Select 
+                id="accountType"
+                aria-label="Floating label select example"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.accountType}
+                required
+                >
+                    <option value="">Select Account</option>
+                    <option value="Savings Account">Savings Account</option>
+                    <option value="Current Account">Current Account</option>
+                    <option value="Foreign Currency Account">Foreign Currency Account</option>
+            </Form.Select>
+            <Form.Text className="text-muted" >
                     {
                         formik.touched.accountType && formik.errors.accountType
                             ? formik.errors.accountType
                             : null
                     }
                 </Form.Text>
-            </Form.Group>
+
+        </Form.Group>
         </div>
 
         <Form.Group className="p-3">
@@ -88,6 +95,7 @@ export const AccountComp: FC<propType> = ({ step, setStep, values, setValues  })
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.bankName}
+                required
             />
             <Form.Text className="text-muted" >
                 {
@@ -98,7 +106,10 @@ export const AccountComp: FC<propType> = ({ step, setStep, values, setValues  })
             </Form.Text>
         </Form.Group>
         <div className="mt-4" >
-            <Button className="pt-2 pb-2 ps-4 pe-4 me-3" >Back</Button>
+            <Button 
+                className="pt-2 pb-2 ps-4 pe-4 me-3"
+                onClick={() => setStep(step-1)} 
+            >Back</Button>
             <Button
                 className="pt-2 pb-2 ps-4 pe-4 ms-3"
                 type="submit"
