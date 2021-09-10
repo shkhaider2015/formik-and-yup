@@ -1,44 +1,48 @@
-import {Button} from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import { FormikProps, useFormik } from "formik"
 import { Form } from "react-bootstrap"
 import { Dispatch, FC, SetStateAction } from "react-transition-group/node_modules/@types/react"
 import { admissionInitialValues, admissionValidationSchema, IAdmission } from "../Types/admission"
 
 type propType = {
-    step : number
-    values : any
-    setStep : Dispatch<SetStateAction<number>>
-    setValues :Dispatch<SetStateAction<any>>
+    step: number
+    values: any
+    setStep: Dispatch<SetStateAction<number>>
+    setValues: Dispatch<SetStateAction<any>>
 }
 
 export const AdmissionComp: FC<propType> = ({ step, setStep, values, setValues }) => {
 
-    const formik:FormikProps<IAdmission>  = useFormik<IAdmission>({
-        initialValues : admissionInitialValues,
+    const formik: FormikProps<IAdmission> = useFormik<IAdmission>({
+        initialValues: admissionInitialValues,
         validationSchema: admissionValidationSchema,
         onSubmit: val => {
-            setStep(step+1)
-            setValues({...val, ...values})
+            console.log("Admission : ", val)
+            setStep(step + 1)
+            setValues({ ...val, ...values })
         }
     })
 
-    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 w-50 shadow" >
+    return <form onSubmit={formik.handleSubmit} className="ps-3 pe-3 pb-3 w-50 shadow rounded" >
+  
         <Form.Group className="p-3" >
-            <Form.Control
+            <Form.Select 
                 id="department"
-                type="text"
-                placeholder="Department"
+                aria-label="Floating label select example"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.department}
-            />
-            <Form.Text className="text-muted" >
-                {
-                    formik.touched.department && formik.errors.department
-                        ? formik.errors.department
-                        : null
-                }
-            </Form.Text>
+                required
+                >
+                <option value="Computer">Computer</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Machenical">Machenical</option>
+                <option value="Civil">Civil</option>
+                <option value="Textile">Textile</option>
+                <option value="Mechatronics">Mechatronics</option>
+                <option value="Chemical">Chemical</option>
+            </Form.Select>
+
         </Form.Group>
 
         <div className="d-flex flex-direction-column justify-content-between p-3" >
@@ -51,6 +55,7 @@ export const AdmissionComp: FC<propType> = ({ step, setStep, values, setValues }
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.batch}
+                    required
                 />
                 <Form.Text className="text-muted" >
                     {
@@ -70,6 +75,7 @@ export const AdmissionComp: FC<propType> = ({ step, setStep, values, setValues }
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.year}
+                    required
                 />
                 <Form.Text className="text-muted" >
                     {
@@ -84,12 +90,13 @@ export const AdmissionComp: FC<propType> = ({ step, setStep, values, setValues }
 
         <Form.Group className="p-3">
             <Form.Control
-            id="program"
+                id="program"
                 type="text"
                 placeholder="Program"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.program}
+                required
             />
             <Form.Text className="text-muted" >
                 {
@@ -101,7 +108,10 @@ export const AdmissionComp: FC<propType> = ({ step, setStep, values, setValues }
         </Form.Group>
 
         <div className="mt-4" >
-            <Button className="pt-2 pb-2 ps-4 pe-4 me-3" >Back</Button>
+            <Button
+                className="pt-2 pb-2 ps-4 pe-4 me-3"
+                onClick={() => setStep(step - 1)}
+            >Back</Button>
             <Button
                 className="pt-2 pb-2 ps-4 pe-4 ms-3"
                 type="submit"
