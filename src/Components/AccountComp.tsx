@@ -1,7 +1,7 @@
 import {Button} from "react-bootstrap"
 import { FormikProps, useFormik } from "formik"
 import { Form } from "react-bootstrap"
-import { FC, Dispatch, SetStateAction } from "react-transition-group/node_modules/@types/react"
+import { FC, Dispatch, SetStateAction } from "react"
 import { accountInitialValues, accountValidationSchema, IAccount } from "../Types/account"
 
 type propType = {

@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
 import { FormikProps, useFormik } from "formik"
 import { Form } from "react-bootstrap"
-import { Dispatch, FC, SetStateAction } from "react-transition-group/node_modules/@types/react"
+import { Dispatch, FC, SetStateAction } from "react"
 import { admissionInitialValues, admissionValidationSchema, IAdmission } from "../Types/admission"
 
 type propType = {
